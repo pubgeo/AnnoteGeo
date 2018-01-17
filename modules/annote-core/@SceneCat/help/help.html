@@ -1,0 +1,223 @@
+<!--
+Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the 
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+sell copies of the Software, and to permit persons to whom the Software is 
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<head>
+    <style>
+    body {
+        background-color: bleachedalmond
+    }
+
+    h1 {
+        color: gray;
+        margin-left: 40px;
+    }
+    
+    table, th, td {
+        border: 1px solid black;
+        padding: 15px;
+    }
+    
+    code {
+        font-family: Courier;
+        font-weight: Bold;
+        font-size: 20px;
+        color: red;
+    }
+    
+    </style>
+</head>
+
+<html>
+    <h2>Usage</h2>
+    <p><code>SceneCat(DATA)</code></p>
+	<p>DATA is a MxN or MxNx3 matrix
+	<p><code>SceneCat()</code></p>
+	<p><li>Select image file through file selector
+	<p><code>SceneCat(DIRECTORY)</code></p>
+	<p><li>Select image file through file selector starting at DIRECTORY
+	<br/><hr width="100%"><br/>
+    <h2>Annotation Window</h2>
+		<p>This is the main window where annotations are drawn.</p>
+		<p>This is the window where the below mentioned keybaord shortcuts work.</p>
+        <p>Annotations can be selected by clicking on them in the main window.  This envokes same behavior as selecting the annotation from the table.</p>
+		<p>Annotation drawing utilized Matlab's roipoly.m.  See Matlab help on roipoly for more information.</p>               
+        <img border="0"  width="600" src="main.png">
+	
+     <br><br><br><br>
+        <p><p>
+        <h3>Annotaion Context Menu</h3>
+        <p>Right-clicking on an annototation actives it's context menu</p>
+        <p>
+		<img border="0"  width="300" src="context.png">            
+            
+	<br/><hr width="100%"><br/>
+    <h2>Table</h2>
+		<p><b>Add</b> a new polygon and table entry</p>
+		<p><b>Edit</b> the polygon of currently seletected row</p>
+        <p><b>Delete</b> the entry of currently seletected row</p>
+		<p><b>Save</b> the current set of annotations</p>
+		<p><b>Load</b> a set of annotation from a previously save MAT-file</p>
+		<p><b>Shade</b> all the current polygons</p>
+		<p><b>Help</b> is here</p>
+		<img border="0"  width="600" src="table.png">
+		
+   <br/><hr width="100%"><br/>
+   <h2>Keyboard Shortcuts</h2>
+  
+    <!--<table style="width:50%">-->
+	<table style="width:600">
+        <tr><th>Keys</th><th>Action</th></tr>
+        <tr>
+            <td>
+                <img border="0"  alt="Up Arrow" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/cursor-up.svg">
+                <img border="0"  alt="e" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/e.svg">
+            </td>
+            <td>
+                PAN UP
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="Down Arrow" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/cursor-down.svg">
+                <img border="0"  alt="d" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/d.svg">
+            </td>
+            <td>
+                PAN DOWN
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="Left Arrow" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/cursor-left.svg">
+                <img border="0"  alt="s" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/s.svg">
+            </td>
+            <td>
+                PAN LEFT
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="Right Arrow" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/cursor-right.svg">
+                <img border="0"  alt="f" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/f.svg">                    
+            </td>
+            <td>
+                PAN RIGHT
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="r" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/r.svg">
+            </td>
+            <td>
+                ZOOM IN
+            </td>                  
+        </tr>
+		 <tr>
+            <td>
+                <img border="0"  alt="w" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/w.svg">
+            </td>
+            <td>
+                ZOOM OUT
+            </td>                  
+        </tr>
+		<tr>
+            <td>
+                <img border="0"  alt="shift" height="60%"  src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/shift.svg">
+				+
+				<img border="0"  alt="w" height="60%" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/w.svg">
+            </td>
+            <td>
+                ZOOM RESET
+            </td>                  
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="ESC" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/esc.svg">
+            </td>
+            <td>
+                Reset drawing state, if ADD button stops working...
+            </td>              
+        </tr>
+          <tr>
+            <td>
+                <img border="0"  alt="shift" height="60%" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/shift.svg">
+				+
+				<img border="0"  alt="w"  height="60%" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/a.svg">
+            </td>
+            <td>
+                ADD
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="shift" height="60%" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/shift.svg">
+				+
+				<img border="0"  alt="w"  height="60%" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/d.svg">
+            </td>
+            <td>
+                 DELETE
+            </td>            
+        </tr>
+        <tr>
+          <th colspan="2" >Contrast Adjustment (Only available for single channel data)</th>
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="~" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/apostroph.svg">
+            </td>
+            <td>
+                Reset color axis
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="1"  src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/1.svg">
+            </td>
+            <td>
+                Decrease lower limit of color axis
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="2"  src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/2.svg">
+            </td>
+            <td>
+                Increase lower limit of color axis
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="3" src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/3.svg">
+            </td>
+            <td>
+                Decrease upper limit of color axis
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <img border="0"  alt="4"  src="../../common/3rdParty/keyboard-keys-speedflips/single-keys-blank/svg/4.svg">
+            </td>
+            <td>
+                Increase upper limit of color axis
+            </td>            
+        </tr>
+    </table>
+
+</html>

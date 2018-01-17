@@ -1,0 +1,192 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Using the layout.GridBagLayout object.</title><meta name="generator" content="MATLAB 7.10"><meta name="date" content="2009-10-09"><meta name="m-file" content="eGridBagLayout"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h1>Using the layout.GridBagLayout object.</h1><!--introduction--><p>This is a simple example using the layout.GridBagLayout object to layout a simple figure with widgets.  Resize layout is maintained automatically.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Creating the widgets.</a></li><li><a href="#3">Creating the LayoutManager</a></li><li><a href="#4">Adding widgets</a></li><li><a href="#10">Setting the Weights</a></li><li><a href="#12">Refining the layout</a></li></ul></div><h2>Creating the widgets.<a name="1"></a></h2><p>Create the figure, panel and widgets.</p><pre class="codeinput">f = figure(<span class="string">'menubar'</span>,<span class="string">'none'</span>, <span class="string">'Position'</span>, [100 100 400 250]);
+movegui(f, <span class="string">'center'</span>);
+
+<span class="comment">% Create a panel for clear screenshots.</span>
+p = uipanel(<span class="string">'Parent'</span>, f);
+
+label = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'string'</span>,<span class="string">'Item Name:'</span>);
+list = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'listbox'</span>);
+editctrl = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+find = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'pushbutton'</span>,<span class="string">'string'</span>,<span class="string">'Find'</span>);
+remove = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'pushbutton'</span>,<span class="string">'string'</span>,<span class="string">'Remove'</span>);
+add = uicontrol(<span class="string">'parent'</span>,p,<span class="string">'style'</span>,<span class="string">'pushbutton'</span>,<span class="string">'string'</span>,<span class="string">'Add...'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_01.png" alt=""> <p>All of the widgets are placed on top of each other because of their default position values.  The layout manager will handle this for us.</p><h2>Creating the LayoutManager<a name="3"></a></h2><p>We create a layout manager on the uipanel 'p', but we could also create one on the figure 'f'.</p><pre class="codeinput">hl = layout.GridBagLayout(p, <span class="string">'HorizontalGap'</span>, 5, <span class="string">'VerticalGap'</span>, 5);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_02.png" alt=""> <h2>Adding widgets<a name="4"></a></h2><p>Here we add the widgets one at a time to see the layout manager work.</p><pre class="codeinput">hl.add(label, 1, 1, <span class="string">'MinimumWidth'</span>, 80, <span class="string">'Anchor'</span>, <span class="string">'NorthWest'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_03.png" alt=""> <pre class="codeinput">hl.add(editctrl, 1, 2, <span class="string">'MinimumWidth'</span>, 40, <span class="string">'Fill'</span>, <span class="string">'Horizontal'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_04.png" alt=""> <pre class="codeinput">hl.add(find, 1, 3, <span class="string">'MinimumWidth'</span>, 80, <span class="string">'Anchor'</span>, <span class="string">'NorthEast'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_05.png" alt=""> <pre class="codeinput">hl.add(list, [2 3], [1 3], <span class="string">'Fill'</span>, <span class="string">'Both'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_06.png" alt=""> <pre class="codeinput">hl.add(remove, 2, 4, <span class="string">'MinimumWidth'</span>, 80);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_07.png" alt=""> <pre class="codeinput">hl.add(add, 3, 4, <span class="string">'MinimumWidth'</span>, 80, <span class="string">'Anchor'</span>, <span class="string">'NorthWest'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_08.png" alt=""> <h2>Setting the Weights<a name="10"></a></h2><p>After everything is in the correct position, we can set the weights to complete the layout.  Notice that even though certain rows and columns have a weight of 0, they still recieve pixels because they have a 'MinimumWidth' and 'MinimumHeight' (defaults to 20).</p><pre class="codeinput">hl.VerticalWeights = [0 0 1];
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_09.png" alt=""> <pre class="codeinput">hl.HorizontalWeights = [0 1 0 0];
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_10.png" alt=""> <h2>Refining the layout<a name="12"></a></h2><p>Notice that the 'Item Name' label is a bit off.  Using the power of MATLAB we can quickly iterate here to find our ideal layout settings and these settings can be used in an M-File which specifies the layout of our GUI.</p><p>It has a bit too much room.  We'll use the Extent property to fit it perfectly.</p><pre class="codeinput">extent = get(label, <span class="string">'extent'</span>);
+setConstraints(hl, 1, 1, <span class="string">'MinimumWidth'</span>, extent(3));
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_11.png" alt=""> <p>It is a bit too high.  We will use the TopInset constraint to adjust it.</p><pre class="codeinput">setConstraints(hl, 1, 1, <span class="string">'TopInset'</span>, 3);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_12.png" alt=""> <p>That moved the editbox as well.  This is because the editbox is not anchored and is always placed in the center.</p><pre class="codeinput">setConstraints(hl, 1, 2, <span class="string">'Anchor'</span>, <span class="string">'NorthWest'</span>);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_13.png" alt=""> <p>There seems to be a bit more space below the 'Item Name' label than we started with.  This is because the MinimumHeight is defaulted to 20, but we only need 17.</p><pre class="codeinput">setConstraints(hl, 1, 1, <span class="string">'MinimumHeight'</span>, 17);
+</pre><img vspace="5" hspace="5" src="eGridBagLayout_14.png" alt=""> <p>GridBagLayout is extremely powerful with many options and settings.  All of these options seem overwhelming at first, but using the interactive nature of MATLAB it is very easy to iterate over your layouts at the command line.  In no time you will be a master of GridBag.</p><p class="footer"><br>
+      Published with MATLAB&reg; 7.10<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Using the layout.GridBagLayout object.
+% This is a simple example using the layout.GridBagLayout object to layout
+% a simple figure with widgets.  Resize layout is maintained automatically.
+
+%% Creating the widgets.
+% Create the figure, panel and widgets.
+
+f = figure('menubar','none', 'Position', [100 100 400 250]);
+movegui(f, 'center');
+
+% Create a panel for clear screenshots.
+p = uipanel('Parent', f);
+
+label = uicontrol('parent',p,'style','text','string','Item Name:');
+list = uicontrol('parent',p,'style','listbox');
+editctrl = uicontrol('parent',p,'style','edit','BackgroundColor','w');
+find = uicontrol('parent',p,'style','pushbutton','string','Find');
+remove = uicontrol('parent',p,'style','pushbutton','string','Remove');
+add = uicontrol('parent',p,'style','pushbutton','string','Add...');
+
+%%
+% All of the widgets are placed on top of each other because of their
+% default position values.  The layout manager will handle this for us.
+
+%% Creating the LayoutManager
+% We create a layout manager on the uipanel 'p', but we could also create
+% one on the figure 'f'.
+
+hl = layout.GridBagLayout(p, 'HorizontalGap', 5, 'VerticalGap', 5);
+
+%% Adding widgets
+% Here we add the widgets one at a time to see the layout manager work.
+hl.add(label, 1, 1, 'MinimumWidth', 80, 'Anchor', 'NorthWest');
+
+%% 
+hl.add(editctrl, 1, 2, 'MinimumWidth', 40, 'Fill', 'Horizontal');
+
+%% 
+hl.add(find, 1, 3, 'MinimumWidth', 80, 'Anchor', 'NorthEast');
+
+%% 
+hl.add(list, [2 3], [1 3], 'Fill', 'Both');
+
+%% 
+hl.add(remove, 2, 4, 'MinimumWidth', 80);
+
+%% 
+hl.add(add, 3, 4, 'MinimumWidth', 80, 'Anchor', 'NorthWest');
+
+%% Setting the Weights
+% After everything is in the correct position, we can set the weights to
+% complete the layout.  Notice that even though certain rows and columns
+% have a weight of 0, they still recieve pixels because they have a
+% 'MinimumWidth' and 'MinimumHeight' (defaults to 20).
+
+hl.VerticalWeights = [0 0 1];
+
+%%
+hl.HorizontalWeights = [0 1 0 0];
+
+%% Refining the layout
+% Notice that the 'Item Name' label is a bit off.  Using the power of
+% MATLAB we can quickly iterate here to find our ideal layout settings and
+% these settings can be used in an M-File which specifies the layout of our
+% GUI.
+
+%%
+% It has a bit too much room.  We'll use the Extent property to fit it
+% perfectly.
+
+extent = get(label, 'extent');
+setConstraints(hl, 1, 1, 'MinimumWidth', extent(3));
+
+%%
+% It is a bit too high.  We will use the TopInset constraint to adjust it.
+
+setConstraints(hl, 1, 1, 'TopInset', 3);
+
+%%
+% That moved the editbox as well.  This is because the editbox is not
+% anchored and is always placed in the center.
+
+setConstraints(hl, 1, 2, 'Anchor', 'NorthWest');
+
+%%
+% There seems to be a bit more space below the 'Item Name' label than we
+% started with.  This is because the MinimumHeight is defaulted to 20, but
+% we only need 17.
+
+setConstraints(hl, 1, 1, 'MinimumHeight', 17);
+
+%%
+% GridBagLayout is extremely powerful with many options and settings.  All
+% of these options seem overwhelming at first, but using the interactive
+% nature of MATLAB it is very easy to iterate over your layouts at the
+% command line.  In no time you will be a master of GridBag.
+
+##### SOURCE END #####
+--></body></html>

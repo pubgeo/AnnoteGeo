@@ -1,0 +1,19 @@
+##
+Pet Type: Object Subtype = 
+Dog: Spitz;Beagle;Chow;Akita
+Cat:Indoors;Outdoors
+Elephant<default>
+Fish:Nemo;Dorie
+Unknown
+Other
+##
+Size = 
+Large
+Medium
+Small
+##
+Category: A SubCategory = 
+A: 1;2;3
+B
+C: a;b;c;d
+Size: Large;Medium;Small

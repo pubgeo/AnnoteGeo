@@ -1,0 +1,10 @@
+##
+Object Type: Object Subtype = 
+Road
+Tarmac
+Building
+Vegetation
+Ground
+Field
+Water
+Other

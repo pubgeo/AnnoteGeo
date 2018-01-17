@@ -1,0 +1,140 @@
+<!--
+Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the 
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+sell copies of the Software, and to permit persons to whom the Software is 
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+
+body.multimarkdown-preview,
+body.multimarkdown-wiki-preview {
+    font-size: 11px;
+}
+</style>
+</head>
+<body class="multimarkdown-preview">
+<div class="content">
+<div class="page-header">This page generated from <a href="help.md">help.md</a>. View on <a href="https://github.com/pubgeo/AnnoteGeo/tree/master/%40AnnoteGeo/help/help.md">GitHub</a></div>
+<div class="hr"></div>
+<h1 id="usage"><a href="#usage" name="usage">Usage</a></h1>
+<pre><code>&gt;&gt; AnnoteGeo
+Start annotation tool with no arguments. User will be prompted with a dialog box to select GeoTIFF image file to label
+
+&gt;&gt; AnnoteGeo(IMAGE_FILE_PATH)
+Start annotation tool using the supplied GeoTIFF filename
+
+&gt;&gt; AnnoteGeo(IMAGE_DIRECTORY)
+Start annotation tool with GeoTIFF file selector at the specified directory 
+</code></pre>
+<h1 id="windows"><a href="#windows" name="windows">Windows</a></h1>
+<p>This section of the guide provides documentation of the functionality available to each window</p>
+<h2 id="annotation-window"><a href="#annotation-window" name="annotation-window">Annotation Window</a></h2>
+<p>This is the main window where annotations are drawn. Annotation drawing utilizes Matlab's roipoly.m. See Matlab help on roipoly for more information.</p>
+<p><img src="main.png" alt="Main Window" /></p>
+<p>Annotations can be updated through the annotation's context menu or using the main data table described below.</p>
+<p><img src="context.png" alt="Context Window" /></p>
+<h2 id="table-window"><a href="#table-window" name="table-window">Table Window</a></h2>
+<p><img src="table.png" alt="Table Window" /></p>
+<table>
+  <thead>
+    <tr class="thead-first-child"><th> Function </th><th> Description </th></tr>
+  </thead>
+  <tbody>
+    <tr class="tbody-first-child"><td> Add      </td><td> Add a new polygon and table entry </td></tr>
+    <tr class="tbody-even-child"><td> Edit     </td><td> Edit the polygon of currently selected row. The same functionality exists by right-clicking a polygon in the Annotation Window and selecting &quot;Edit&quot;. This will show each vertice in the polygon, which are draggable. To finish editing, double click anywhere inside the polygon. <br><br> <img src="edit.png" alt="Polygon Editor" /> <br><br>   You can also right click and select &quot;Split&quot;, which allows you to select two vertices that will separate the selected polygon into two individual polygons. <br><br> <img src="split1.png" alt="Example Split" /> -&gt; <img src="split2.png" alt="Example Split" /><br><br>You can also hold the 'A' key while editing to add vertices to the polygon. </td></tr>
+    <tr class="tbody-odd-child"><td> Delete   </td><td> Delete the entry of currently selected row </td></tr>
+    <tr class="tbody-even-child"><td> Save     </td><td> Save the current set of annotations. This saves all annotations from the original file, including polygons that were removed due to being outside of the background image bounds. </td></tr>
+    <tr class="tbody-odd-child"><td> Load     </td><td> Load a set of annotations from a previously save MAT-file. If the file has polygons that are outside the background image bounds, they are ignored for faster loading and processing times. However, when saving new/edited annotations, they are put back in to preserve ground truth. If there are already polygons loaded into the tool, they are removed and lost upon loading in new data. Make sure to save any work before loading in new data. </td></tr>
+    <tr class="tbody-even-child"><td> Shade    </td><td> Shade all of the current polygons </td></tr>
+    <tr class="tbody-odd-child"><td> Help     </td><td> This document </td></tr>
+    <tr class="tbody-even-child"><td> Jump     </td><td> Jump to annotation of currently selected row </td></tr>
+    <tr class="tbody-odd-child"><td> Import   </td><td> Import ESRI Shapefile </td></tr>
+    <tr class="tbody-even-child"><td> Export   </td><td> Export annotations to KML </td></tr>
+    <tr class="tbody-odd-child"><td> SaveGT   </td><td> Export GT rasters to PWD. This will export a xxx_GTI.tif, xxx_GTL.tif, and xxx_GTC.tif to the present working directory. This calls on truther2raster.m to create and save these raster products. These are geotiff products that represent ground truth indexed buildings (GTI), ground truth label buildings (GTL), and ground truth color buildings (GTC). The labeling follows the LAS specification </td></tr>
+  </tbody>
+</table>
+<h2 id="overview-window"><a href="#overview-window" name="overview-window">Overview Window</a></h2>
+<p>This window provides context to the annotation window. It shows an overview of the entire GeoTIFF and provides shading to show current, viewed, loaded regions of the image (i.e. a &quot;snail trail&quot; to help keep track of which parts of the image have already been labeled).</p>
+<p><img src="overview.png" alt="Overview Window" /></p>
+<h3 id="window-shading"><a href="#window-shading" name="window-shading">Window Shading</a></h3>
+<p>The colors of the shading provide context to the user. In addition to showing which regions have been previously viewed, image data currently and previously loaded is also indicated.  As the tool employs data buffering to enable support for large images on low resource systems, this information allows the user visual indication of how efficiently the image is navigated and when the user is near the edge of the current image buffer.</p>
+<table>
+  <thead>
+    <tr class="thead-first-child"><th> Color  </th><th> Status                          </th></tr>
+  </thead>
+  <tbody>
+    <tr class="tbody-first-child"><td> Green  </td><td> Current View                    </td></tr>
+    <tr class="tbody-even-child"><td> Blue   </td><td> Previously Viewed               </td></tr>
+    <tr class="tbody-odd-child"><td> Yellow </td><td> Currently loaded image buffer   </td></tr>
+    <tr class="tbody-even-child"><td> Red    </td><td> Previously loaded image buffers </td></tr>
+  </tbody>
+</table>
+<h3 id="toolbar"><a href="#toolbar" name="toolbar">Toolbar</a></h3>
+<table>
+  <thead>
+    <tr class="thead-first-child"><th> Display                                       </th><th> Function </th></tr>
+  </thead>
+  <tbody>
+    <tr class="tbody-first-child"><td> <img src="geojump.png" alt="Enable Geo Jump Mode" />          </td><td> Enable crosshair cursor to select location in image to navigate to. </td></tr>
+    <tr class="tbody-even-child"><td> <img src="currentImageLocation.png" alt="Current Location" /> </td><td> Displays the pixel location of the cursor in in x,y positions. </td></tr>
+    <tr class="tbody-odd-child"><td> <img src="reset.png" alt="Snail Trail Reset" />               </td><td> Resets the snail trails. </td></tr>
+  </tbody>
+</table>
+<h2 id="keyboard-shortcuts"><a href="#keyboard-shortcuts" name="keyboard-shortcuts">Keyboard Shortcuts</a></h2>
+<p>These shortcuts are only applicable on the annotation window</p>
+<h3 id="general"><a href="#general" name="general">General</a></h3>
+<table>
+  <thead>
+    <tr class="thead-first-child"><th> Buttons            </th><th> Action                                                                                 </th></tr>
+  </thead>
+  <tbody>
+    <tr class="tbody-first-child"><td> shift + d          </td><td> Delete selected annotation                                                             </td></tr>
+    <tr class="tbody-even-child"><td> shift + left-click </td><td> Select multiple annotations. Used to apply context menu action to multiple annotations.</td></tr>
+    <tr class="tbody-odd-child"><td> shift + a 	     </td><td> Add new annotation                                                                     </td></tr>
+    <tr class="tbody-even-child"><td> F1 .. FX           </td><td> Add new annotation of #th category                                                     </td></tr>
+    <tr class="tbody-odd-child"><td> up-arrow or e 	 </td><td> PAN UP                                                                                 </td></tr>
+    <tr class="tbody-even-child"><td> down-arrow or d    </td><td> PAN DOWN                                                                               </td></tr>
+    <tr class="tbody-odd-child"><td> left-arrow or s    </td><td> PAN LEFT                                                                               </td></tr>
+    <tr class="tbody-even-child"><td> right-arrow f      </td><td> PAN RIGHT                                                                              </td></tr>
+    <tr class="tbody-odd-child"><td> r                  </td><td> ZOOM IN                                                                                </td></tr>
+    <tr class="tbody-even-child"><td> w                  </td><td> ZOOM OUT                                                                               </td></tr>
+    <tr class="tbody-odd-child"><td> shift + w          </td><td> ZOOM RESET                                                                             </td></tr>
+    <tr class="tbody-even-child"><td> ESC                </td><td> Reset drawing state (If Add button stops working, this may help)                       </td></tr>
+  </tbody>
+</table>
+<h3 id="contrast-adjustment"><a href="#contrast-adjustment" name="contrast-adjustment">Contrast Adjustment</a></h3>
+<p>Only available for single channel data</p>
+<table>
+  <thead>
+    <tr class="thead-first-child"><th> Buttons </th><th> Action                             </th></tr>
+  </thead>
+  <tbody>
+    <tr class="tbody-first-child"><td> ~       </td><td> Reset color axis                   </td></tr>
+    <tr class="tbody-even-child"><td> 1       </td><td> Decrease lower limit of color axis </td></tr>
+    <tr class="tbody-odd-child"><td> 2       </td><td> Increase lower limit of color axis </td></tr>
+    <tr class="tbody-even-child"><td> 3       </td><td> Decrease upper limit of color axis </td></tr>
+    <tr class="tbody-odd-child"><td> 4       </td><td> Increase upper limit of color axis </td></tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,41 @@
+##
+Type = 
+Not labeled/classified (0)<notbuilding>
+Unclassified (1)
+Ground (2)
+Low vegetation (3)
+High vegetation (5)
+Building (6)<building,default>
+Water (9)
+Rail (10)
+Bridge (17)
+Vehicle (64)
+Uncertain (65)
+##
+Status=
+New
+Original
+Revised
+Needs Review
+Complete
+Unknown
+Save for Later
+##
+Material = 
+Unclassified (0)<nomaterial>
+Asphalt (1)
+Concrete/Stone (2)
+Glass (3)
+Tree (4)
+Non-tree vegetation (5)
+Metal (6)
+Red ceramic (7)
+Soil (8)
+Solar panel (9)
+Water (10)
+Polymer (11)
+Unscored (12)
+
+
+
+
