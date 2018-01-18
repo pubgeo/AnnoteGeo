@@ -15,12 +15,12 @@ Annotation tool for labeling GeoTIFF images
 * ESRI Shapefiles can be imported into the tool (Needs to be referenced to same UTM zone as imagery)
 
 #### Matlab Requirements
-* Minimim Version:
- * R2014b
+Minimim Version:
+* R2014b
 
-* Toolboxes
- * image_toolbox
- * map_toolbox
+Toolboxes
+* image_toolbox
+* map_toolbox
 
 ###  Usage
     >> run
