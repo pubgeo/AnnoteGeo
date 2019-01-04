@@ -1,6 +1,5 @@
 # JHU/APL pubgeo
-JHU/APL is working to help advance the state of the art in geospatial computer vision by developing public benchmark data sets and open source software. 
-For more information on this and other efforts, please visit [JHU/APL](http://www.jhuapl.edu/pubgeo.html).
+Open source software and public data for geospatial computer vision. For more information, please visit [JHU/APL](https://www.jhuapl.edu/pubgeo/).
 
 ## AnnoteGeo
 Annotation tool for labeling GeoTIFF images
