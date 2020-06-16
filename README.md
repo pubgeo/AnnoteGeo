@@ -1,6 +1,3 @@
-# JHU/APL pubgeo
-Open source software and public data for geospatial computer vision
-
 ## AnnoteGeo
 Annotation tool for labeling GeoTIFF images
 >AnnoteGeo is a Matlab based image annotation tool for manually creating classification labels for GeoTIFF images.
